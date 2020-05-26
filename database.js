@@ -1,5 +1,7 @@
 import { MongoClient } from "https://deno.land/x/mongo@v0.7.0/mod.ts";
-import "https://deno.land/x/dotenv/load.ts";
+import { config } from "https://deno.land/x/dotenv/mod.ts"
+
+const { DB_USERNAME, DB_PASSWORD, DB_NAME } = config();
 
 class Database {
   constructor() {
@@ -8,8 +10,8 @@ class Database {
 
   connect() {
     this.client = new MongoClient();
-    this.client.connectWithUri(`mongodb+srv://${Deno.env.get('DB_USERNAME')}:${Deno.env.get('DB_PASSWORD')}@todolist-ndrda.mongodb.net/test?retryWrites=true&w=majority`);
+    this.client.connectWithUri(`mongodb+srv://${DB_USERNAME}:${DB_PASSWORD}@todolist-ndrda.mongodb.net/test?retryWrites=true&w=majority`);
   }
 }
 
-export default new Database().client?.database(Deno.env.get('DB_NAME'));
+export default new Database().client?.database(DB_NAME);
