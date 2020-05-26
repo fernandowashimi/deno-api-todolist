@@ -1,0 +1,4 @@
+export default {
+  DB_URI: 'Database URI',
+  DB_DATABASE: 'Database name'
+};
